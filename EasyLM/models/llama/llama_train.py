@@ -4,6 +4,7 @@ from functools import partial
 from tqdm import tqdm, trange
 import numpy as np
 import mlxu
+from tensorboardX import SummaryWriter
 
 import jax
 import jax.numpy as jnp
@@ -62,6 +63,8 @@ def main(argv):
         enable=FLAGS.log_all_worker or (jax.process_index() == 0),
     )
     set_random_seed(FLAGS.seed)
+    summary_logger = SummaryWriter(logger.output_dir)
+  
 
     tokenizer = AutoTokenizer.from_pretrained(FLAGS.tokenizer)
     dataset = DatasetFactory.load_dataset(FLAGS.train_dataset, tokenizer)
@@ -239,6 +242,7 @@ def main(argv):
                 log_metrics.update(dataset_metrics)
                 log_metrics = jax.device_get(log_metrics)
                 logger.log(log_metrics)
+                summary_logger.add_scalars("training_metrics", log_metrics, step)
                 tqdm.write("\n" + pprint.pformat(log_metrics) + "\n")
 
             if FLAGS.save_milestone_freq > 0 and (step + 1) % FLAGS.save_milestone_freq == 0:
