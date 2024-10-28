@@ -138,7 +138,7 @@ deployment_groups:
       mount_options: defaults,_netdev,implicit_dirs,allow_other,dir_mode=0777,file_mode=766
 
   - id: move_files
-    source: ./
+    source: ./easylm
     use: [data_bucket]
 
 
