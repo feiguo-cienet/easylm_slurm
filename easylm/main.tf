@@ -23,15 +23,15 @@ resource "random_id" "resource_name_suffix" {
   byte_length = 4
 }
 
-## fine tune python file
+## EasyLM
 
-data "local_file" "fine_tune_file" {
-  filename = "${path.module}/fine-tune.py"
+data "local_file" "easylm_file" {
+  filename = "${path.module}/easylm.tgz"
 }
-resource "google_storage_bucket_object" "fine_tune" {
-  name = "fine-tune.py"
+resource "google_storage_bucket_object" "easylm" {
+  name = "easylm.tgz"
   bucket  = local.bucket
-  content = data.local_file.fine_tune_file.content
+  content = data.local_file.easylm_file.content
 }
 
 # Slurm batch file

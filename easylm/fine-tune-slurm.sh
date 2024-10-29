@@ -2,12 +2,14 @@
 
 #SBATCH --job-name=llama-jax-fine-tune
 #SBATCH --nodes=1
-#SBATCH --partition=g2gpu8
+#SBATCH --partition=n1t4
 #SBATCH --time=1:10:00
 
 export CONDA_BASE=/opt/conda
 source $CONDA_BASE/bin/activate base
 conda activate llama_jax
+cd /data_bucket
+tar zxvf easylm.tgz
 cd $SLURM_SUBMIT_DIR
 export PYTHONPATH=/data_bucket:$PYTHONPATH
 python -m EasyLM.models.llama.llama_train \
