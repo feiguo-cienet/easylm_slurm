@@ -19,7 +19,7 @@ python -m EasyLM.models.llama.llama_train \
     --log_freq=50 \
     --save_model_freq=0 \
     --save_milestone_freq=250 \
-    --llama.base_model='llama_7b' \
+    --llama.base_model='llama3_8b' \
     --load_dataset_state='' \
     --load_checkpoint='' \
     --optimizer.type='adamw' \
@@ -38,5 +38,5 @@ python -m EasyLM.models.llama.llama_train \
     --checkpointer.save_optimizer_state=True \
     --logger.online=False \
     --logger.prefix='easylm' \
-    --logger.project="llama_jax_7b" \
+    --logger.project="llama3_8b_jax" \
     --logger.output_dir="/data_bucket/output" 
