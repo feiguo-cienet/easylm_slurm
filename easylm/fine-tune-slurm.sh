@@ -2,7 +2,7 @@
 
 #SBATCH --job-name=llama-jax-fine-tune
 #SBATCH --nodes=1
-#SBATCH --partition=n1t4
+#SBATCH --partition=g2gpu2
 #SBATCH --time=1:10:00
 
 export CONDA_BASE=/opt/conda
